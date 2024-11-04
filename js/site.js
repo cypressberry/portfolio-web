@@ -1,21 +1,30 @@
-// index.js - purpose and description here
-// Author: Your Name
-// Date:
 
-// Constants
+js_content = """
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+});
+"""
 
-// Functions
+# Saving these files to provide to the user
+import os
 
-// this is an example function and this comment tells what it doees and what parameters are passed to it.
-function myFunction(param1, param2) {
-  // some code here
-  // return results;
-}
+# Directory to save files
+output_dir = '/mnt/data/veart_carrd_clone'
+os.makedirs(output_dir, exist_ok=True)
 
-function main() {
-  console.log("Main function started.");
-  // the code that makes everything happen
-}
+# Write the files
+with open(os.path.join(output_dir, "index.html"), "w") as html_file:
+    html_file.write(html_content)
 
-// let's get this party started
-main();
+with open(os.path.join(output_dir, "styles.css"), "w") as css_file:
+    css_file.write(css_content)
+
+with open(os.path.join(output_dir, "script.js"), "w") as js_file:
+    js_file.write(js_content)
+
+output_dir
